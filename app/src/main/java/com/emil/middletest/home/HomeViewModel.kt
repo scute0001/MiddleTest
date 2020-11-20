@@ -23,6 +23,7 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
     val db = FirebaseFirestore.getInstance()
 
     init {
+        _articleListData.value = null
         getDataFromFireStore(db)
     }
 
@@ -49,8 +50,9 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
                     articleList.add(tempPublishData)
                     Log.i("temp","tempPublishData is $tempPublishData")
                 }
-                Log.i("temp","articleList is $articleList")
+//                Log.i("temp","articleList is $articleList")
                 _articleListData.value = articleList
+//                Log.i("1","articleList is ${_articleListData.value}")
             }
 
     }
