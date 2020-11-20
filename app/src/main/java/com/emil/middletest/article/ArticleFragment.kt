@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -33,7 +34,12 @@ class ArticleFragment : DialogFragment() {
 
 
         viewModel.submitData.observe(viewLifecycleOwner, Observer {data ->
-            Log.i("data","data is $data")
+            if (data == null) {
+                Toast.makeText(requireContext(), "輸入的欄位有缺喔", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.i("data","data is $data")
+                viewModel.submitToFireStore(data)
+            }
         })
 
         binding.buttonSubmit.setOnClickListener {
