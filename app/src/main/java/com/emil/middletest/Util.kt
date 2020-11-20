@@ -5,7 +5,6 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
 
-@SuppressLint("SimpleDateFormat")
 @BindingAdapter("timeTransfer")
 fun convertLongToDateString(textView: TextView, systemTime: Long){
     textView.text = SimpleDateFormat("yyyy.MM.dd' 'HH:mm")
