@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.emil.middletest.R
 import com.emil.middletest.databinding.ArticleFragmentBinding
 import com.emil.middletest.home.HomeFragmentViewModelFactory
@@ -41,6 +42,15 @@ class ArticleFragment : DialogFragment() {
                 viewModel.submitToFireStore(data)
             }
         })
+
+        viewModel.submitDataFinished.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                Toast.makeText(requireContext(), "新增資料成功", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToHomeFragment())
+                viewModel.submitToFireStoreFinished()
+            }
+        })
+
 
         binding.buttonSubmit.setOnClickListener {
             viewModel.setArticle()

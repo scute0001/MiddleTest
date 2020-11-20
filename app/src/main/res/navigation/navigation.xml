@@ -19,5 +19,11 @@
         android:id="@+id/articleFragment"
         android:name="com.emil.middletest.article.ArticleFragment"
         android:label="article_fragment"
-        tools:layout="@layout/article_fragment" />
+        tools:layout="@layout/article_fragment" >
+        <action
+            android:id="@+id/action_articleFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

@@ -25,6 +25,14 @@ class ArticleViewModel(app: Application) : AndroidViewModel(app){
     val submitData: LiveData<PublishData>
         get() = _submitData
 
+    private val _submitDataFinished = MutableLiveData<Boolean>()
+    val submitDataFinished: LiveData<Boolean>
+        get() = _submitDataFinished
+
+    init {
+        _submitDataFinished.value = null
+    }
+
 
 
     fun setArticle() {
@@ -49,8 +57,16 @@ class ArticleViewModel(app: Application) : AndroidViewModel(app){
                 .addOnSuccessListener { documentReference ->
                     Log.d("TAG", "DocumentSnapshot written with ID: ${documentReference.id}")
                     documentReference.update("id", documentReference.id)
+
+                    //submit success and set navigation to home
+                    _submitDataFinished.value = true
                 }
         }
+    }
+
+    fun submitToFireStoreFinished() {
+        _submitDataFinished.value = null
+        _submitData.value = null
     }
 
 //    fun test(db: FirebaseFirestore) {
