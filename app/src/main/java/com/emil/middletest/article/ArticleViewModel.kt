@@ -17,9 +17,14 @@ class ArticleViewModel(app: Application) : AndroidViewModel(app){
     var _title: String = ""
     var _category: String = ""
     var _content: String = ""
+    val authorInfo = Author("Emil@gmail.com", "Emil0001", "EMil")
+
     // Access a Cloud Firestore instance from your Activity
     val db = FirebaseFirestore.getInstance()
 
+   init {
+
+   }
 
     private val _submitData = MutableLiveData<PublishData>()
     val submitData: LiveData<PublishData>
@@ -29,16 +34,28 @@ class ArticleViewModel(app: Application) : AndroidViewModel(app){
     val submitDataFinished: LiveData<Boolean>
         get() = _submitDataFinished
 
+
+    private val _userCheck = MutableLiveData<Boolean>()
+    val userCheck: LiveData<Boolean>
+        get() = _userCheck
+
     init {
         _submitDataFinished.value = null
+        _userCheck.value = null
     }
 
 
+    fun checkUser(user: Author) {
+        if (user.name != "" && user.email != "" && user.id != "") {
+            _userCheck.value = true
+        }
+    }
 
     fun setArticle() {
+
         if ( _title != "" && _content != "" && _category != "" ) {
             val article = PublishData(
-                author = Author("Emil@gmail.com", "Emil0001", "EMil"),
+                author = authorInfo,
                 category = _category,
                 content = _content,
                 title = _title,

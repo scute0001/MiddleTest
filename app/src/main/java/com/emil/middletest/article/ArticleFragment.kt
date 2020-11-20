@@ -33,6 +33,15 @@ class ArticleFragment : DialogFragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ArticleViewModel::class.java)
         binding.viewModel = viewModel
 
+//        viewModel.userCheck.observe(viewLifecycleOwner, Observer {
+//            if (it == true) {
+//                binding.buttonSubmit.isEnabled = true
+//            } else {
+//                binding.buttonSubmit.isEnabled = false
+//                Toast.makeText(requireContext(), "目前沒有使用者資訊", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+
 
         viewModel.submitData.observe(viewLifecycleOwner, Observer {data ->
             if (data == null) {
