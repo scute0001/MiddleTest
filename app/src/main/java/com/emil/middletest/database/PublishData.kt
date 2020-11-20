@@ -1,8 +1,11 @@
 package com.emil.middletest.database
 
+import android.os.Parcelable
 import com.google.firebase.Timestamp
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class PublishData(
     val author: Author?,
     val title: String?,
@@ -11,7 +14,7 @@ data class PublishData(
     val createdTime: Long = Calendar.getInstance().timeInMillis,
     val id: String = "",
     val category: Int?
-)
+): Parcelable
 {
 }
 

@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.emil.middletest.databinding.HomeFragmentBinding
+import com.google.firebase.FirebaseApp
+import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
 
@@ -29,7 +31,10 @@ class HomeFragment : Fragment() {
 
 
 
+
+
+
         return binding.root
     }
-    
+
 }
