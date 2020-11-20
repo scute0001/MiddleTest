@@ -36,7 +36,6 @@ class HomeFragment : Fragment() {
         binding.recyclerPublish.adapter = adapter
 
         viewModel.articleListData.observe(viewLifecycleOwner, Observer {
-            Log.i("ITTTTT", "it $it")
             adapter.submitList(it)
         })
 
@@ -46,6 +45,11 @@ class HomeFragment : Fragment() {
         }
 
 
+        val swipeRefresh = binding.swiperefresh
+        swipeRefresh.setOnRefreshListener {
+            viewModel.getDataFromFireStore()
+            swipeRefresh.isRefreshing = false
+        }
 
 
 

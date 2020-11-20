@@ -23,10 +23,10 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     init {
         _articleListData.value = null
-        getDataFromFireStore(db)
+        getDataFromFireStore()
     }
 
-    fun getDataFromFireStore(db: FirebaseFirestore) {
+    fun getDataFromFireStore() {
         var articleList = mutableListOf<PublishData>()
 
         db.collection("articles").get()
