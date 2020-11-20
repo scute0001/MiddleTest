@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.emil.middletest.R
+import androidx.lifecycle.ViewModelProvider
 import com.emil.middletest.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment() {
@@ -21,19 +21,15 @@ class HomeFragment : Fragment() {
         val binding = HomeFragmentBinding.inflate(inflater, container , false)
         binding.lifecycleOwner = this
 
-
-
+        val application = requireNotNull(activity).application
+        val viewModelFactory = HomeFragmentViewModelFactory(application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+        binding.viewModel = viewModel
 
 
 
 
         return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
+    
 }
