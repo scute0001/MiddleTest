@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.emil.middletest.database.Author
 import com.emil.middletest.database.PublishData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlin.collections.HashMap
 
 class HomeViewModel(app: Application) : AndroidViewModel(app) {
@@ -29,7 +30,8 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
     fun getDataFromFireStore() {
         var articleList = mutableListOf<PublishData>()
 
-        db.collection("articles").get()
+        db.collection("articles").orderBy("createdTime", Query.Direction.DESCENDING)
+            .get()
             .addOnSuccessListener { data ->
 
                 data.forEach {
