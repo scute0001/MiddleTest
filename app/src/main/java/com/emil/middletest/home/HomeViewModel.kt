@@ -35,7 +35,7 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
                 data.forEach {
                     val temp = it.data
                     val author = it.data.get("author") as HashMap<String, String>
-                    
+
                     val tempPublishData = PublishData(
                         author = Author(name = author.get("name"), email = author.get("email"), id = author.get("id")),
                         title = temp.get("title") as String,

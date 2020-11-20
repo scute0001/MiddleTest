@@ -59,10 +59,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="text_created_time"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_author_name"
-            tools:text="text_created_time" />
+            tools:text="text_created_time"
+            app:timeTransfer="@{publishData.createdTime}"/>
 
         <TextView
             android:id="@+id/text_article_content"
