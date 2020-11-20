@@ -8,7 +8,6 @@ import androidx.lifecycle.MutableLiveData
 import com.emil.middletest.database.Author
 import com.emil.middletest.database.PublishData
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.*
 import kotlin.collections.HashMap
 
 class HomeViewModel(app: Application) : AndroidViewModel(app) {
@@ -32,27 +31,23 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
         db.collection("articles").get()
             .addOnSuccessListener { data ->
-                Log.i("dateTemp","dateTemp is ${data.documents}")
 
-//                articleList = data.toObjects(PublishData::class.java)
                 data.forEach {
                     val temp = it.data
-
+                    val author = it.data.get("author") as HashMap<String, String>
+                    
                     val tempPublishData = PublishData(
-                        author = Author(),
+                        author = Author(name = author.get("name"), email = author.get("email"), id = author.get("id")),
                         title = temp.get("title") as String,
                         content = temp.get("content") as String,
                         createdTime = temp.get("createdTime") as Long,
                         id = temp.get("id") as String,
                         category = temp.get("category") as String
                     )
-
                     articleList.add(tempPublishData)
-                    Log.i("temp","tempPublishData is $tempPublishData")
+
                 }
-//                Log.i("temp","articleList is $articleList")
                 _articleListData.value = articleList
-//                Log.i("1","articleList is ${_articleListData.value}")
             }
 
     }
